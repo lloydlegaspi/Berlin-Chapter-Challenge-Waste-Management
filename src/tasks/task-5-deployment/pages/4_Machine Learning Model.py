@@ -35,7 +35,20 @@ with tab1:
 
     @st.cache_data
     def load_data():
-        df = pd.read_csv('data/Processed_DatasetsAmount-of Waste-Generated-By-State 32121-0003.csv')
+        try:
+            # Try ISO-8859-1 encoding first (common for German characters)
+            df = pd.read_csv('src/tasks/task-5-deployment/data/Amount-of Waste-Generated-By-State 32121-0003.csv', 
+                            encoding='ISO-8859-1')
+        except UnicodeDecodeError:
+            try:
+                # If that fails, try UTF-8 with error handling
+                df = pd.read_csv('src/tasks/task-5-deployment/data/Amount-of Waste-Generated-By-State 32121-0003.csv', 
+                            encoding='UTF-8', 
+                            errors='replace')
+            except:
+                # If all else fails, try latin1
+                df = pd.read_csv('src/tasks/task-5-deployment/data/Amount-of Waste-Generated-By-State 32121-0003.csv', 
+                            encoding='latin1')
         return df
 
     def states():
@@ -45,7 +58,7 @@ with tab1:
 
     @st.cache_resource
     def load_model():
-        model = pickle.load(open('models/wm-model.pkl','rb'))
+        model = pickle.load(open('src/tasks/task-5-deployment/models/wm-model.pkl','rb'))
         return model
 
     def show_search_query():
@@ -84,7 +97,20 @@ with tab2:
 
     @st.cache_data
     def load_data():
-        df = pd.read_csv('data/Processed_DatasetsAmount-of Waste-Generated-By-State 32121-0003.csv')
+        try:
+            # Try ISO-8859-1 encoding first (common for German characters)
+            df = pd.read_csv('src/tasks/task-5-deployment/data/Amount-of Waste-Generated-By-State 32121-0003.csv', 
+                            encoding='ISO-8859-1')
+        except UnicodeDecodeError:
+            try:
+                # If that fails, try UTF-8 with error handling
+                df = pd.read_csv('src/tasks/task-5-deployment/data/Amount-of Waste-Generated-By-State 32121-0003.csv', 
+                            encoding='UTF-8', 
+                            errors='replace')
+            except:
+                # If all else fails, try latin1
+                df = pd.read_csv('src/tasks/task-5-deployment/data/Amount-of Waste-Generated-By-State 32121-0003.csv', 
+                            encoding='latin1')
         return df
     
     @st.cache_data
@@ -95,7 +121,7 @@ with tab2:
 
     @st.cache_resource
     def load_model():
-        model = pickle.load(open('models/wm-model.pkl','rb'))
+        model = pickle.load(open('src/tasks/task-5-deployment/models/wm-model.pkl','rb'))
         return model
 
 
